@@ -467,6 +467,13 @@ func builtinString_endsWith(call FunctionCall) Value {
 	return toValue_bool(strings.HasSuffix(value, target))
 }
 
+func builtinString_includes(call FunctionCall) Value {
+	checkObjectCoercible(call.runtime, call.This)
+	value := call.This.string()
+	target := call.Argument(0).string()
+	return toValue_bool(strings.Contains(value, target))
+}
+
 // 7.2 Table 2 — Whitespace Characters & 7.3 Table 3 - Line Terminator Characters
 const builtinString_trim_whitespace = "\u0009\u000A\u000B\u000C\u000D\u0020\u00A0\u1680\u180E\u2000\u2001\u2002\u2003\u2004\u2005\u2006\u2007\u2008\u2009\u200A\u2028\u2029\u202F\u205F\u3000\uFEFF"
 
